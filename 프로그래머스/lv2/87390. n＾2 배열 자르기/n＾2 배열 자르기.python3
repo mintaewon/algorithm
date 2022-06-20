@@ -1,0 +1,37 @@
+# import itertools
+# def solution(n, left, right):
+#     node = [[0]*n for _ in range(n)]
+#     for num in range(n):
+#         x, y = 0, num
+#         while x < y:
+#             node[x][y] = num+1
+#             x += 1
+#         if x == y:
+#             while y >= 0:
+#                 node[x][y] = num+1
+#                 y -= 1
+#     return list(itertools.chain.from_iterable(node))[left:right+1]
+
+# def solution(n, left, right):
+#     ls = []
+#     while len(ls) < right:
+#         for i in range(n):
+
+# def solution(n, left, right):
+#     lst = []
+#     for i in range(left//n, right//n +1):
+#         for j in range(i):
+#             lst.append(i+1)
+#         for k in range(n-i):
+#             lst.append(i+k+1)
+#     answer = lst[left-(left//n)*n:right+1-(left//n)*n]
+#     # return answer
+
+def solution(n, left, right):
+    result = []
+    for i in range(left//n, right//n+1):
+        for _ in range(i):
+            result.append(i+1)
+        for j in range(n-i):
+            result.append(i+j+1)
+    return result[left%n:left%n + (right-left+1)]
