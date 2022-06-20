@@ -1,0 +1,48 @@
+def solution(n, arr1, arr2):
+    answer = []
+    for a1, a2 in zip(arr1, arr2):
+        arr = bin(a1 | a2)[2:]
+        if len(arr) != n:
+            arr = arr.zfill(n)
+        arr = arr.replace('1', '#')
+        arr = arr.replace('0', ' ')
+        answer.append(arr)
+    return answer
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+#     answer = [''] * n
+#     new_arr1 = []
+#     new_arr2 = []
+    
+#     for i in range(n):
+#         new_arr1.append(bin(arr1[i])[2:])
+#         new_arr2.append(bin(arr2[i])[2:])
+        
+#     for seq in [new_arr1, new_arr2]:
+#         for i in range(n):
+#             if len(seq[i]) != n:
+#                 seq[i] = '0'*(n-len(seq[i]))+seq[i]
+
+    
+#     for q in range(n):
+#         for p in range(n):
+#             if (new_arr1[q][p] == '1') or (new_arr2[q][p] == '1'):
+
+#                 answer[q] += '#'
+#             else:
+#                 answer[q] += ' '
+
+#     return answer
