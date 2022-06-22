@@ -1,0 +1,21 @@
+from itertools import permutations
+def solution(n, weak, dist):
+    answer = []
+    len_weak = len(weak)
+    dist = sorted(dist, reverse=True)
+    new_weak = weak + [w+n for w in weak[:-1]]
+    for idx, ww in enumerate(weak):
+        for friends in permutations(dist):
+            cnt = 1
+            position = ww
+            for f in friends:
+                position+=f
+                if position < new_weak[idx+len_weak-1]:
+                    cnt += 1
+                    for i in new_weak[idx+1:idx+len_weak]:
+                        if position < i:
+                            position = i
+                            break
+                else:
+                    answer.append(cnt)
+    return min(answer) if answer else -1
