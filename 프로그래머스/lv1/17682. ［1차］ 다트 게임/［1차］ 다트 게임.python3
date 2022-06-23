@@ -1,0 +1,30 @@
+import re
+def solution(dartResult):
+    dart = re.findall(r'(\d+[A-Z][*|#]?)', dartResult)
+    bonus = {'S':1, 'D':2, 'T':3}
+    answer = [0]*3
+    for idx, rating in enumerate(dart):
+        # 10이 들어가는 경우
+        if len(rating)==4:
+            if rating[-1]=='*':
+                if idx == 0:
+                    answer[idx] = 10**bonus[rating[2]]*2
+                else:
+                    answer[idx-1], answer[idx] = answer[idx-1]*2, 10**bonus[rating[2]]*2
+            else:
+                answer[idx] = 10**bonus[rating[2]]*(-1)
+        # 10도 포함될 수 있는 경우
+        elif len(rating)==3:
+            if rating[-1]=='*':
+                if idx == 0:
+                    answer[idx] = int(rating[0])**bonus[rating[1]]*2
+                else:
+                    answer[idx-1], answer[idx] = answer[idx-1]*2, int(rating[0])**bonus[rating[1]]*2
+            elif rating[-1]=='#':
+                answer[idx] = int(rating[0])**bonus[rating[1]]*(-1)
+            else:
+                answer[idx] = 10**bonus[rating[2]]
+        else:
+            answer[idx] = int(rating[0])**bonus[rating[1]]
+        print(answer)
+    return sum(answer)
