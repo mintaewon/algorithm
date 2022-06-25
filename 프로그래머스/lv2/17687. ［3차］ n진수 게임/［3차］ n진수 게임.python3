@@ -1,3 +1,4 @@
+# n진법 함수
 def func(n,number):
     temp = ''
     # 16진법까지
@@ -19,5 +20,4 @@ def solution(n, t, m, p):
         if len(answer) == t:
             return answer
         answer += ls[i]
-    return ls
-    
+    return answer
