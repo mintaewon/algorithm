@@ -1,0 +1,23 @@
+def func(n,number):
+    temp = ''
+    # 16진법까지
+    eng = ''.join([chr(i+65) for i in range(6)])
+    while number > 0:
+        number, mod =divmod(number, n)
+        if mod > 9:
+            temp += eng[mod%10]
+        else:
+            temp += str(mod)
+    return temp[::-1]
+
+def solution(n, t, m, p):
+    ls = "0"
+    answer =""
+    for num in range(m*t):
+        ls += func(n, num)
+    for i in range(p-1,len(ls),m):
+        if len(answer) == t:
+            return answer
+        answer += ls[i]
+    return ls
+    
