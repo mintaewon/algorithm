@@ -1,0 +1,23 @@
+def search(y,x, board):
+    coordinate=set()
+    for i in range(y-1):
+        for j in range(x-1):
+            s = board[i][j]
+            if s == "0":
+                continue
+            if board[i+1][j] == s and board[i][j+1] == s and board[i+1][j+1] == s:
+                coordinate = coordinate | set([(i,j), (i+1,j), (i,j+1), (i+1,j+1)])
+    return coordinate
+
+def solution(m, n, board):
+    answer = 0
+    board = [(list(i)) for i in zip(*board)]
+    while True:
+        coordinate = search(n,m,board)
+        if len(coordinate) == 0:
+            break
+        answer += len(coordinate)
+        for a,b in coordinate:
+            board[a][b] = "0"
+        board = [list(("".join(list(filter(("0").__ne__, board[i])))).zfill(m)) for i in range(len(board))]
+    return answer
