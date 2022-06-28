@@ -1,0 +1,27 @@
+import re
+from itertools import permutations
+from collections import deque
+
+def operator(x,y,s):
+    return str(eval(x+s+y))
+
+def solution(expression):
+    answer = []
+    sign = set(re.findall(r'[-,+,*]', expression))
+    permutation_sign = list(permutations(sign))
+    new_expression = re.split(r'(\d{1,3})', expression)[1:-1]
+    
+    for ps in permutation_sign:
+        Q_expression = deque(new_expression)
+        for p in ps:
+            ls = []
+            while len(Q_expression) != 0:
+                temp = Q_expression.popleft()
+                if temp == p:
+                    ls.append(operator(ls.pop(), Q_expression.popleft(), temp))
+                else:
+                    ls.append(temp)
+            Q_expression = deque(ls)
+        answer.append(abs(int(Q_expression[0])))
+
+    return max(answer)
