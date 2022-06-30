@@ -1,0 +1,18 @@
+def dfs(k,computers,n):
+    if computers[k][k] == 0:
+        return
+    computers[k][k] = 0
+    ls = [i for i in range(n) if computers[k][i] == 1]
+    for i in ls:
+        computers[k][i] = 0
+        computers[i][k] = 0
+    for i in ls:
+        dfs(i, computers,n)
+        
+def solution(n, computers):
+    answer = 0
+    for i in range(n):
+        if computers[i][i] == 1:
+            dfs(i,computers,n)
+            answer+=1
+    return answer
