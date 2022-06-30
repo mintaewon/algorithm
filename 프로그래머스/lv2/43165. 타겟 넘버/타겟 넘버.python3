@@ -1,0 +1,19 @@
+def dfs(numbers, target, seq, answer):
+    global cnt
+    if seq >= len(numbers):
+        if answer == target:
+            cnt += 1
+            return
+        else:
+            return
+    dfs(numbers, target, seq+1, answer+numbers[seq])
+    dfs(numbers, target, seq+1, answer-numbers[seq])
+    
+    
+
+def solution(numbers, target):
+    global cnt
+    cnt = 0
+    answer = 0
+    dfs(numbers, target, 0, answer)
+    return cnt
