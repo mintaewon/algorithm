@@ -1,6 +1,6 @@
 def solution(participant, completion):
-    participant.sort()
-    completion.sort()
+    participant = sorted(participant)
+    completion = sorted(completion)
     
     for i, s in enumerate(completion):
         if participant[i] != s:
