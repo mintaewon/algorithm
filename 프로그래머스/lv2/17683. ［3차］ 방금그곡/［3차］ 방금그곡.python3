@@ -1,0 +1,28 @@
+def changer(mm):
+    for a, b in zip(['A#', 'C#', 'D#', 'F#', 'G#'], ['a', 'c', 'd', 'f', 'g']):
+        mm = mm.replace(a,b)
+    return mm
+
+def solution(m, musicinfos):
+    answer = ''
+    title = []
+    music = []
+    time_table = []
+    for seq in musicinfos:
+        melody = ''
+        seq_ls = seq.split(',')
+        start = int(seq_ls[0].split(':')[0])*60 + int(seq_ls[0].split(':')[1])
+        end = int(seq_ls[1].split(':')[0])*60 + int(seq_ls[1].split(':')[1])
+        time = end - start
+        tmp = changer(seq_ls[3])
+        melody = tmp*(time//len(tmp)) + tmp[:time%len(tmp)]
+        if changer(m) in melody:
+            music.append(melody)
+            title.append(seq_ls[2])
+            time_table.append(time)
+    if len(title) == 1:
+        return title[0]
+    elif len(title) == 0:
+        return "(None)"
+    else:
+        return title[time_table.index(max(time_table))]
