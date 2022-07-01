@@ -1,0 +1,31 @@
+def solution(numbers, hand):
+    answer = ""
+    left_position = 10
+    right_position = 12
+    for i in numbers:
+        if i==1 or i==4 or i==7:
+            answer += "L"
+            left_position = i
+        elif i==3 or i==6 or i==9:
+            answer += "R"
+            right_position = i
+        else:
+            if i==0: i=11
+            # 거리계산
+            lp = sum(divmod(abs(left_position-i),3))
+            rp = sum(divmod(abs(right_position-i),3))
+            
+            if lp > rp:
+                answer += "R"
+                right_position = i
+            elif lp < rp:
+                answer += "L"
+                left_position = i
+            else:
+                if hand == "right":
+                    answer += "R"
+                    right_position = i
+                else:
+                    answer += "L"
+                    left_position = i
+    return answer
